@@ -1,0 +1,35 @@
+// export class Booking {
+//     id: number;
+//     referenz: string;
+//     super_PNR: number;
+//     pax: number;
+//     pnr: string;
+//     fg: string;
+//     ca: string;
+//     flug_hin_nr: string;
+//     flug_zurueck_nr: string;
+//     hin: string;
+//     zurueck: string;
+//     abflug_zeit: string;
+//     ankunft_zeit: string;
+//     start: string;
+//     ziel: string;
+//     anrede: string;
+//     name: string;
+//     vorname: string;
+//     alter: number;
+//     euro: string;
+//     typ: string;
+//     source: string;
+//     eingang: string;
+//     timestamp: string;
+//     editor: string;
+//     version_nr: string;
+//     // timestamp: string;
+//     // editor_vorname: string;
+//     // editor_nachname: string;
+//     // version_nr: string;
+//     db_aktiv: boolean;
+//     status: string;
+//     detail: string;
+// }

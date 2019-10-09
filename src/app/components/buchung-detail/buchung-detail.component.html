@@ -1,0 +1,129 @@
+<div class="mat-elevation-z8 detail-container detail__referenz" *ngIf="buchung">
+    <div class="detail-invoice-container">
+        <div class="invoice-header">
+            <mat-toolbar>
+                <span>Referenz: {{buchung.invoice | uppercase}}</span>
+            </mat-toolbar>
+            <mat-form-field>
+                <mat-label>Version</mat-label>
+                <mat-select [(value)]="version">
+                    <mat-option value="{{buchung.modificationTimestamp}}">{{buchung.modificationTimestamp}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="primary" class="primary invoice-header__button--anfrage">Live-Daten der Airline anfragen</button>
+        </div>
+    </div>
+</div>
+<div class="mat-elevation-z8 detail-container detail__table">
+    <div class="table-container">
+        <table mat-table [dataSource]="flightDataSource">
+        <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+        
+        <!-- Typ Column -->
+        <ng-container matColumnDef="typ">
+            <th mat-header-cell *matHeaderCellDef> TYP </th>
+            <td mat-cell *matCellDef="let flight">                     
+                <div *ngIf="flight.roundTrip==true; else oW">
+                    RT
+                </div>    
+                <ng-template #oW>
+                    OW
+                </ng-template>
+            </td>
+        </ng-container>
+
+        <!-- Super PNR Column -->
+        <ng-container matColumnDef="super_PNR">
+            <th mat-header-cell *matHeaderCellDef> Super_PNR </th>
+            <td mat-cell *matCellDef="let flight"> {{buchung.pnr}} </td>
+        </ng-container>
+        
+        <!-- FG Column -->
+        <ng-container matColumnDef="fg">
+            <th mat-header-cell *matHeaderCellDef> FG </th>
+            <td mat-cell *matCellDef="let flight"> {{flight.marketingCarrier | uppercase}} </td>
+        </ng-container>
+
+        <!-- PNR Column -->
+        <ng-container matColumnDef="pnr">
+            <th mat-header-cell *matHeaderCellDef> PNR </th>
+            <td mat-cell *matCellDef="let flight"> {{flight.carrierPnr | uppercase}} </td>
+        </ng-container>
+
+        <!-- Hin Column -->
+        <ng-container matColumnDef="hin">
+            <th mat-header-cell *matHeaderCellDef> von </th>
+            <td mat-cell *matCellDef="let flight"> {{flight.depDate}} </td>
+        </ng-container>
+
+        <!-- Zurueck Column -->
+        <ng-container matColumnDef="zurueck">
+            <th mat-header-cell *matHeaderCellDef> bis </th>
+            <td mat-cell *matCellDef="let flight"> {{flight.retDate}} </td>
+        </ng-container>
+
+        <!-- Flug Hin Nr. Column -->
+        <ng-container matColumnDef="flug_hin_nr">
+            <th mat-header-cell *matHeaderCellDef> Flugnr Hin </th>
+            <td mat-cell *matCellDef="let flight; let i = index;">
+                <div *ngIf="isRT.includes(true); else oneWayFlight">
+                    {{segment[0].operatingCarrier}}{{segment[0].flightNumber}}
+                </div>    
+                <ng-template #oneWayFlight>
+                    {{segs[i]}}
+                </ng-template>
+            </td>
+        </ng-container>
+
+        <!-- Flug Zurueck Nr. Column -->
+        <ng-container matColumnDef="flug_zurueck_nr">
+            <th mat-header-cell *matHeaderCellDef> Flugnr Rück </th>
+            <td mat-cell *matCellDef="let flight">
+                <div *ngIf="isRT.includes(true); else oneWayFlightReturn">
+                    {{segment[1].operatingCarrier}}{{segment[1].flightNumber}}
+                </div>    
+                <ng-template #oneWayFlightReturn> 
+                </ng-template>
+            </td>
+        </ng-container>
+
+        <!-- Start Column -->
+        <ng-container matColumnDef="start">
+            <th mat-header-cell *matHeaderCellDef> Start </th>
+            <td mat-cell *matCellDef="let flight"> {{flight.depAirport | uppercase}} </td>
+        </ng-container>
+
+        <!-- Ziel Column -->
+        <ng-container matColumnDef="ziel">
+            <th mat-header-cell *matHeaderCellDef> Ziel </th>
+            <td mat-cell *matCellDef="let flight"> {{flight.arrAirport | uppercase}} </td>
+        </ng-container>
+
+        <!-- Detail Column -->
+        <ng-container matColumnDef="detail">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let buchung">
+                <button mat-raised-button color="primary">Alternative</button>
+                <button mat-raised-button color="primary">Umbuchung</button>
+            </td>
+        </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</div>
+<app-buchung-airline-detail 
+    [buchung]="buchung" 
+    [data]="dataInfo" 
+    [flights]="flight" 
+    [segmentsHin]="segmentsHin" 
+    [segmentsReturn]="segmentsReturn"
+    [pnrsHin]="pnrHin"
+    [pnrsReturn]="pnrReturn"
+    [hinDatumSel]="hinDatum"  
+    [returnDatumSel]="returnDatum"
+    [passengers]="passenger" 
+    [statusSel]="statusInfo">
+</app-buchung-airline-detail>

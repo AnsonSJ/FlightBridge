@@ -1,0 +1,38 @@
+<mat-accordion>
+    <mat-expansion-panel class="filter" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+        <mat-panel-title>
+            Filter
+        </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+            <input matInput placeholder="Referenz" (keyup)="applyFilter($event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Text" (keyup)="applyFilter($event.target.value)">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Hin</mat-label>
+            <input matInput [matDatepicker]="pickerhin">
+            <mat-datepicker-toggle matSuffix [for]="pickerhin"></mat-datepicker-toggle>
+            <mat-datepicker #pickerhin></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Rück</mat-label>
+            <input matInput [matDatepicker]="pickerreturn">
+            <mat-datepicker-toggle matSuffix [for]="pickerreturn"></mat-datepicker-toggle>
+            <mat-datepicker #pickerreturn></mat-datepicker>
+        </mat-form-field>
+
+        <!-- <button mat-raised-button color="primary">Suchen</button> -->
+
+        <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="alleanzeigen">Alle anzeigen</mat-radio-button>
+            <mat-radio-button value="softbuchungen">Softbuchungen</mat-radio-button>
+        </mat-radio-group>
+    </mat-expansion-panel>
+</mat-accordion>

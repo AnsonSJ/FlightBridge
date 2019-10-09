@@ -1,0 +1,81 @@
+table {
+  width: 100%;
+}
+.date-block__list, button{
+  margin-right: 40px;
+  margin-bottom: 20px;
+}
+.datatable-container {
+  width: 80%;
+  margin-top: 20px;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+.table-container {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+.date-block__list {
+  display: inline-block;
+}
+.mat-icon-button {
+  margin: 0;
+}
+.info_tooltip {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  position: relative;
+  top: 4px;
+  left: 6px;
+}
+.status_fehler {
+  color: #da0021;
+}
+.status_ok {
+  color: #64d501;
+}
+.mat-expansion-panel-header:not([aria-disabled=true]) {
+  width: 140px;
+  margin: 0 auto;
+}
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+.data-filter-invoice {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+.data-filter-invoice .mat-form-field {
+  width: 250px;
+  font-size: 20px;
+}
+.data-filter-invoice .mat-form-field-infix {
+  position: relative;
+}
+.data-filter form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.data-filter-invoice .form-label {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 20px;
+  color: rgba(0,0,0,.87);
+  margin-right: 10px;
+}
+.data-filter-invoice .mat-icon-button {
+  position: absolute;
+  top:3px;
+}

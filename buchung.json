@@ -1,0 +1,179 @@
+{
+    "data": [ {
+      "id" : 1,
+      "pnr" : "FB00000001",
+      "creationTimestamp" : "11.06.2019 17:49:06",
+      "modificationTimestamp" : "11.06.2019 17:49:06",
+      "invoice" : "A12345",
+      "originAirport" : "DUS",
+      "destinationAirport" : "PMI",
+      "departureDate" : "15.09.2019",
+      "returnDate" : "22.09.2019",
+      "flights" : [ {
+        "bookingTimestamp" : "11.06.2019 17:49:06",
+        "source" : "ypsilon",
+        "depAirport" : "DUS",
+        "arrAirport" : "PMI",
+        "depDate" : "15.09.2019",
+        "retDate" : "22.09.2019",
+        "providerPnr" : "16633683",
+        "marketingCarrier" : "4U",
+        "carrierPnr" : "4U_TEST_K83TJ7LMWA",
+        "segments" : [ {
+          "depAirport" : "DUS",
+          "arrAirport" : "PMI",
+          "operatingCarrier" : "EW",
+          "flightNumber" : "9592",
+          "bookingClass" : "Y",
+          "depDate" : "15.09.2019",
+          "depTime" : "09:00",
+          "arrDate" : "15.09.2019",
+          "arrTime" : "11:25"
+        }, {
+          "depAirport" : "PMI",
+          "arrAirport" : "DUS",
+          "operatingCarrier" : "EW",
+          "flightNumber" : "9587",
+          "bookingClass" : "Y",
+          "depDate" : "22.09.2019",
+          "depTime" : "19:20",
+          "arrDate" : "22.09.2019",
+          "arrTime" : "21:45"
+        } ],
+        "price" : 1269.94,
+        "roundTrip" : true
+      } ],
+      "price" : 1269.94,
+      "passengers" : [ {
+        "gender" : "M",
+        "type" : "A",
+        "lastname" : "KLENZ",
+        "firstname" : "HANSA",
+        "birthdate" : "11.06.1994"
+      }, {
+        "gender" : "F",
+        "type" : "A",
+        "lastname" : "KLENZ",
+        "firstname" : "HANSB",
+        "birthdate" : "11.06.1994"
+      }, {
+        "gender" : "M",
+        "type" : "C",
+        "lastname" : "KLENZ",
+        "firstname" : "HANSC",
+        "birthdate" : "30.01.2014"
+      }, {
+        "gender" : "M",
+        "type" : "I",
+        "lastname" : "KLENZ",
+        "firstname" : "HANS-E",
+        "birthdate" : "11.06.2018"
+      } ]
+    },
+    {
+      "id" : 2,
+      "pnr" : "FB00000002",
+      "creationTimestamp" : "07.10.2019 15:13:06",
+      "modificationTimestamp" : "07.10.2019 15:13:06",
+      "invoice" : "A23456",
+      "originAirport" : "DUS",
+      "destinationAirport" : "PMI",
+      "departureDate" : "01.11.2019",
+      "returnDate" : "08.11.2019",
+      "flights" : [ {
+        "bookingTimestamp" : "07.10.2019 15:13:06",
+        "source" : "ypsilon",
+        "depAirport" : "DUS",
+        "arrAirport" : "PMI",
+        "depDate" : "01.11.2019",
+        "retDate" : null,
+        "providerPnr" : "17633683",
+        "marketingCarrier" : "4U",
+        "carrierPnr" : "4U_TEST_K94UK8MN0B",
+        "segments" : [ {
+          "depAirport" : "DUS",
+          "arrAirport" : "VIE",
+          "operatingCarrier" : "EW",
+          "flightNumber" : "9754",
+          "bookingClass" : "Y",
+          "depDate" : "01.11.2019",
+          "depTime" : "07:00",
+          "arrDate" : "01.11.2019",
+          "arrTime" : "08:50"
+        }, {
+          "depAirport" : "VIE",
+          "arrAirport" : "PMI",
+          "operatingCarrier" : "EW",
+          "flightNumber" : "5912",
+          "bookingClass" : "Y",
+          "depDate" : "01.11.2019",
+          "depTime" : "10:15",
+          "arrDate" : "01.11.2019",
+          "arrTime" : "12:45"
+        } ],
+        "price" : 539.94,
+        "roundTrip" : false
+      }, {
+        "bookingTimestamp" : "07.10.2019 15:13:06",
+        "source" : "ypsilon",
+        "depAirport" : "PMI",
+        "arrAirport" : "DUS",
+        "depDate" : "08.11.2019",
+        "retDate" : null,
+        "providerPnr" : "17633684",
+        "marketingCarrier" : "4U",
+        "carrierPnr" : "4U_TEST_K94UK8MN0C",
+        "segments" : [ {
+          "depAirport" : "PMI",
+          "arrAirport" : "MUC",
+          "operatingCarrier" : "EW",
+          "flightNumber" : "1787",
+          "bookingClass" : "Y",
+          "depDate" : "08.11.2019",
+          "depTime" : "15:10",
+          "arrDate" : "08.11.2019",
+          "arrTime" : "17:25"
+        }, {
+          "depAirport" : "MUC",
+          "arrAirport" : "DUS",
+          "operatingCarrier" : "EW",
+          "flightNumber" : "1918",
+          "bookingClass" : "Y",
+          "depDate" : "08.11.2019",
+          "depTime" : "19:10",
+          "arrDate" : "08.11.2019",
+          "arrTime" : "20:25"
+        } ],
+        "price" : 269.97,
+        "roundTrip" : false
+      } ],
+      "price" : 809.91003,
+      "passengers" : [ {
+        "gender" : "M",
+        "type" : "A",
+        "lastname" : "KLENZ",
+        "firstname" : "HANSA",
+        "birthdate" : "11.06.1994"
+      }, {
+        "gender" : "F",
+        "type" : "A",
+        "lastname" : "KLENZ",
+        "firstname" : "HANSB",
+        "birthdate" : "11.06.1994"
+      }, {
+        "gender" : "M",
+        "type" : "C",
+        "lastname" : "KLENZ",
+        "firstname" : "HANSC",
+        "birthdate" : "30.01.2014"
+      }, {
+        "gender" : "M",
+        "type" : "I",
+        "lastname" : "KLENZ",
+        "firstname" : "HANSD",
+        "birthdate" : "11.06.2018"
+      } ]
+    }
+   ]
+}
+

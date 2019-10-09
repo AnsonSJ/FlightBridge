@@ -1,0 +1,53 @@
+.detail-container {
+    width: 80%;
+    margin-top: 20px;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+.detail__referenz {
+    background: #fff;
+    position: sticky;
+    top: 65px;
+    z-index:99;
+}
+.detail__table {
+    position: sticky;
+    top: 162px;
+    z-index:99;
+}
+.invoice-header {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.mat-form-field {
+    padding-top: 10px;
+}
+.mat-toolbar {
+    background: #fff;
+}
+.invoice-header__button--anfrage {
+    margin-right: 16px;
+}
+.table-container, .mat-table {
+    width: 100%;
+}
+.table-container {
+    overflow: auto;
+}
+mat-toolbar {
+    width: auto;
+}
+mat-form-field {
+    width: 300px;
+}
+.table-container .mat-raised-button {
+    margin: 5px 0 5px 20px;
+    line-height: 30px;
+}
+td:last-child.mat-cell{
+    width: 250px;
+}

@@ -1,0 +1,271 @@
+<div class="airline-detail-container" *ngIf="buchung">
+    <mat-card class="mat-elevation-z8">
+        <mat-card-title>Live-Daten der Airline</mat-card-title>
+        <mat-card-content>
+            <div class="table-container">
+                <div class="table-airline">
+                    <table mat-table class="mat-elevation-z2" [dataSource]="segmentsHin">
+                        <ng-container matColumnDef="detail">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-icon class="mat-18 flight_takeoff">flight</mat-icon>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="start" >
+                            <th mat-header-cell *matHeaderCellDef> Abflughafen </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="segment.depAirport" [(ngModel)]="segment.depAirport">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="ziel" >
+                            <th mat-header-cell *matHeaderCellDef> Zielflughafen </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="segment.arrAirport" [(ngModel)]="segment.arrAirport">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="fg" >
+                            <th mat-header-cell *matHeaderCellDef> Airline </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="segment.operatingCarrier" [(ngModel)]="segment.operatingCarrier">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="flug_hin_nr" >
+                            <th mat-header-cell *matHeaderCellDef> Flugnummer </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="segment.flightNumber" [(ngModel)]="segment.flightNumber">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="abflug_datum" >
+                            <th mat-header-cell *matHeaderCellDef> Abflugdatum </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="fromDateHin" [value]="segment.depDate" [(ngModel)]="segment.depDate">
+                                    <mat-datepicker-toggle matSuffix [for]="fromDateHin"></mat-datepicker-toggle>
+                                    <mat-datepicker #fromDateHin></mat-datepicker>
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="abflug_zeit" >
+                            <th mat-header-cell *matHeaderCellDef> Abflugzeit </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput type="time" [value]="segment.depTime" [(ngModel)]="segment.depTime">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="ankunft_datum" >
+                            <th mat-header-cell *matHeaderCellDef> Ankunftsdatum </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="fromDateHin" [value]="segment.arrDate" [(ngModel)]="segment.arrDate">
+                                    <mat-datepicker-toggle matSuffix [for]="fromDateHin"></mat-datepicker-toggle>
+                                    <mat-datepicker #fromDateHin></mat-datepicker>
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="ankunft_zeit" >
+                            <th mat-header-cell *matHeaderCellDef> Ankunftszeit </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput type="time" [value]="segment.arrTime" [(ngModel)]="segment.arrTime">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="pnr" >
+                            <th mat-header-cell *matHeaderCellDef> PNR </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="pnrsHin" [(ngModel)]="pnrsHin">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnsHin"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsHin;"></tr>
+                    </table>
+                    <button mat-icon-button color="primary" (click)="addRow()">
+                        <mat-icon class="mat-18">add</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="removeRow()">
+                        <mat-icon class="mat-18">remove</mat-icon>
+                    </button>
+                </div>
+                <!-- return -->
+                <div class="table-airline">
+                    <table mat-table class="mat-elevation-z2" [dataSource]="segmentsReturn">
+                        <ng-container matColumnDef="detail">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let buchung">
+                                <mat-icon class="mat-18 flight_land">flight</mat-icon>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="ziel" >
+                            <th mat-header-cell *matHeaderCellDef> Abflughafen </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="segment.depAirport" [(ngModel)]="segment.depAirport">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="start">
+                            <th mat-header-cell *matHeaderCellDef> Zielflughafen </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="segment.arrAirport" [(ngModel)]="segment.arrAirport">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="fg" >
+                            <th mat-header-cell *matHeaderCellDef> Airline </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="segment.operatingCarrier" [(ngModel)]="segment.operatingCarrier">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="flug_zurueck_nr" >
+                            <th mat-header-cell *matHeaderCellDef> Flugnummer </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="segment.flightNumber" [(ngModel)]="segment.flightNumber">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="abflug_datum" >
+                            <th mat-header-cell *matHeaderCellDef> Abflugdatum </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="fromDateReturn" [value]="segment.depDate" [(ngModel)]="segment.depDate">
+                                    <mat-datepicker-toggle matSuffix [for]="fromDateReturn"></mat-datepicker-toggle>
+                                    <mat-datepicker #fromDateReturn></mat-datepicker>
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="abflug_zeit" >
+                            <th mat-header-cell *matHeaderCellDef> Abflugzeit </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput type="time" [value]="segment.depTime" [(ngModel)]="segment.depTime">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="ankunft_datum" >
+                            <th mat-header-cell *matHeaderCellDef> Ankunftsdatum </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="fromDateReturn" [value]="segment.arrDate" [(ngModel)]="segment.arrDate">
+                                    <mat-datepicker-toggle matSuffix [for]="fromDateReturn"></mat-datepicker-toggle>
+                                    <mat-datepicker #fromDateReturn></mat-datepicker>
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="ankunft_zeit" >
+                            <th mat-header-cell *matHeaderCellDef> Ankunftszeit </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput type="time" [value]="segment.arrTime" [(ngModel)]="segment.arrTime">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="pnr">
+                            <th mat-header-cell *matHeaderCellDef> PNR </th>
+                            <td mat-cell *matCellDef="let segment">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="pnrsReturn" [(ngModel)]="pnrsReturn">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <!-- <tr mat-header-row *matHeaderRowDef="displayedColumnsReturn"></tr> -->
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnsReturn;"></tr>
+                    </table>
+                    <button mat-icon-button color="primary" (click)="addRow('return')">
+                        <mat-icon class="mat-18">add</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" (click)="removeRow()">
+                        <mat-icon class="mat-18">remove</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="airline-detail__button--pnr">
+                <button mat-raised-button color="primary">Zeige vollständigen PNR</button>
+            </div>
+            <div class="table-container">
+                <div class="table-pas">
+                    <table mat-table class="mat-elevation-z2" [dataSource]="passengers">
+                        <ng-container matColumnDef="anrede" >
+                            <th mat-header-cell *matHeaderCellDef> Anr </th>
+                            <td mat-cell *matCellDef="let passenger">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="passenger.gender" [(ngModel)]="passenger.gender">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="name" >
+                            <th mat-header-cell *matHeaderCellDef> Name </th>
+                            <td mat-cell *matCellDef="let passenger">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="passenger.lastname" [(ngModel)]="passenger.lastname">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="vorname" >
+                            <th mat-header-cell *matHeaderCellDef> Vorname </th>
+                            <td mat-cell *matCellDef="let passenger">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="passenger.firstname" [(ngModel)]="passenger.firstname">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="alter" >
+                            <th mat-header-cell *matHeaderCellDef> Geburtsdatum </th>
+                            <td mat-cell *matCellDef="let passenger">
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="passenger.birthdate" [(ngModel)]="passenger.birthdate">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="euro" >
+                            <th mat-header-cell *matHeaderCellDef> Preis </th>
+                            <td mat-cell *matCellDef="let buchung"> 
+                                <mat-form-field floatLabel="never">
+                                    <input matInput [value]="buchung.euro" [(ngModel)]="buchung.euro">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumnPas"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumnPas;"></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="stornopreis">
+                <span><strong>Stornopreis: </strong></span>
+                <mat-form-field floatLabel="never">
+                    <input matInput [value]="buchung.price" [(ngModel)]="buchung.price">
+                </mat-form-field>
+                <span> EUR</span>
+            </div>
+        </mat-card-content>
+        <mat-card-footer>
+            <button mat-raised-button color="primary">Abbrechen</button>
+            <div class="author">
+                <span>Letzte Änderung von {{buchung.modificationTimestamp}}</span>
+            </div>
+            <div class="status">
+                <span><strong>Status: </strong></span>
+                <mat-form-field floatLabel="never">
+                    <mat-select [(value)]="statusSel">
+                        <mat-option value="{{buchung.status}}">{{buchung.status}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <button mat-raised-button color="primary">Speichern</button>
+        </mat-card-footer>	
+    </mat-card>
+</div>

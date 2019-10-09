@@ -1,0 +1,237 @@
+<div class="mat-elevation-z8 datatable-container data-filter">
+    <mat-accordion>
+        <mat-expansion-panel [expanded]="true" (opened)="panelOpenState = true; toDateValue=''; fromDateValue=''; textSearchValue=''; resetCheckbox();">
+            <mat-expansion-panel-header>
+                <mat-panel-description>
+                    Referenzsuchen
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="data-filter-invoice">
+                <form class="date-block" [formGroup]="filterForm">
+                    <span class="form-label">Referenz: </span>
+                    <mat-form-field >
+                    <!-- <mat-form-field hintLabel="Max. 7 Zeichen"> -->
+                        <input matInput #invoiceSearch formControlName="invoiceNr" [(ngModel)]="invoiceValue">
+                        <!-- <input matInput #input maxlength="7" placeholder="Referenz" formControlName="invoiceNr" [(ngModel)]="invoiceValue"> -->
+                        <!-- <button mat-button *ngIf="invoiceValue" matSuffix mat-icon-button aria-label="Clear" (click)="invoiceValue='';showAll();">
+                            <mat-icon>close</mat-icon>
+                        </button> -->
+                        <!-- <mat-hint align="end">{{input.value?.length || 0}}/7</mat-hint> -->
+                        <button mat-icon-button color="primary" class="primary" (click)="applyFilter();">
+                            <mat-icon>search</mat-icon>
+                            <ng-template>
+                                <mat-icon class="mat-18" color="primary"> </mat-icon>
+                            </ng-template>
+                        </button>
+                    </mat-form-field>
+                    <!-- <mat-icon class="info_tooltip" matTooltip="Blank Buchungsnummer">info</mat-icon> -->
+                </form>
+            </div>        
+        </mat-expansion-panel> 
+        <mat-expansion-panel (opened)="panelOpenState = true; invoiceValue='';" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-description>
+                    Erweitertesuchen
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <form class="date-block" [formGroup]="filterForm">
+                <!-- <div class="date-block__list">
+                    <mat-form-field hintLabel="Max. 7 Zeichen">
+                        <input matInput #input maxlength="7" placeholder="Referenz" formControlName="invoiceNr" [(ngModel)]="invoiceValue">
+                        <mat-hint align="end">{{input.value?.length || 0}}/7</mat-hint>
+                    </mat-form-field>
+                    <mat-icon class="info_tooltip" matTooltip="Blank Buchungsnummer">info</mat-icon>
+                </div> -->
+                <div class="date-block__list">
+                    <mat-form-field>
+                        <input matInput placeholder="Text" formControlName="textSearch" [(ngModel)]="textSearchValue">
+                        <!-- <button mat-button *ngIf="textSearch" matSuffix mat-icon-button aria-label="Clear">
+                            <mat-icon>close</mat-icon>
+                        </button> -->
+                    </mat-form-field>
+                    <mat-icon class="info_tooltip" matTooltip="Suche nach den Felder: Referenz, Super PNR, Fluggeber, Vorname, Nachname">info</mat-icon>
+                </div>
+                <div class="date-block__list">
+                    <mat-form-field>
+                        <mat-label>Hin</mat-label>
+                        <input matInput [matDatepicker]="fromDate" formControlName="fromDate" [(ngModel)]="fromDateValue">
+                        <!-- <button mat-button *ngIf="fromDateValue" matSuffix mat-icon-button aria-label="Clear" (click)="fromDateValue=''; showAll();">
+                            <mat-icon>close</mat-icon>
+                        </button> -->
+                        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                        <mat-datepicker #fromDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="date-block__list">
+                    <mat-form-field>
+                        <mat-label>Rück</mat-label>
+                        <input matInput [matDatepicker]="toDate" formControlName="toDate" [(ngModel)]="toDateValue">
+                        <!-- <button mat-button *ngIf="toDateValue" matSuffix mat-icon-button aria-label="Clear" (click)="toDateValue=''; showAll();">
+                            <mat-icon>close</mat-icon>
+                        </button> -->
+                        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                        <mat-datepicker #toDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="date-block__list">
+                    <mat-checkbox #errorCheck formControlName="statusCheck" (change)="onChange($event)" name="status">Nur Probleme</mat-checkbox>
+                    <!-- <mat-select formControlName="statusCheck" [(ngModel)]="statusValue" name="status">
+                        <mat-option *ngFor="let statusItem of statusItems" [value]="statusItem.name">{{statusItem.name}}</mat-option>
+                    </mat-select> -->
+                </div>
+                
+                <button mat-raised-button color="primary" class="primary" (click)="applyFilter();">Suchen</button>
+                <button mat-raised-button color="primary" class="primary" (click)="clearAll(); toDateValue=''; fromDateValue=''; textSearchValue='';">Zurücksetzen</button>
+                <!-- <div class="date-block__list">
+                    <mat-form-field>
+                        <input matInput #input maxlength="7" placeholder="Referenz" formControlName="softNr" [value]= [(ngModel)]="softNrValue">
+                    </mat-form-field>
+                </div> -->
+                <!-- <button mat-raised-button color="primary" class="primary" value="1" (click)="showSoft($event); toDateValue=''; fromDateValue=''; invoiceValue='';">softbuchungen</button> -->
+                <!-- <div class="date-block__list">
+                    <mat-radio-group aria-label="Select an option" color="warn" (change)="onChange($event)">
+                        <mat-radio-button value="alleanzeigen" [checked]="showDataTable" (click)="showAll(); toDateValue=''; fromDateValue=''; invoiceValue='';">Alle anzeigen</mat-radio-button>
+                        <mat-radio-button value="softbuchungen">Softbuchungen</mat-radio-button>
+                    </mat-radio-group>
+                </div> -->
+            </form>
+
+            <!-- <button mat-raised-button color="primary">Suchen</button> -->
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+<div class="mat-elevation-z8 datatable-container">
+    <div class="table-container">
+        <table #filteredTable mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Referenz Column -->
+            <ng-container matColumnDef="referenz" sticky>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Referenz </th>
+                <td mat-cell *matCellDef="let element"> {{element.invoice.toUpperCase()}} </td>
+            </ng-container>
+
+            <!-- Super_PNR Column -->
+            <ng-container matColumnDef="super_PNR">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Super_PNR </th>
+                <td mat-cell *matCellDef="let element"> {{element.pnr}} </td>
+            </ng-container>
+
+            <!-- PAX Column -->
+            <ng-container matColumnDef="pax">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> PAX </th>
+                <td mat-cell *matCellDef="let element"> {{element.passengers.length}} </td>
+            </ng-container>
+
+            <!-- FG Column -->
+            <ng-container matColumnDef="fg">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> FG </th>
+                <td mat-cell *matCellDef="let element"> {{element.flights[0].marketingCarrier}} 
+                </td>
+            </ng-container>
+
+            <!-- HIN Column -->
+            <ng-container matColumnDef="hin">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Hin </th>
+                <td mat-cell *matCellDef="let element"> {{element.departureDate}} </td>
+            </ng-container>
+
+            <!-- ZURÜCK Column -->
+            <ng-container matColumnDef="zurueck">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Zurück </th>
+                <td mat-cell *matCellDef="let element"> {{element.returnDate}} </td>
+            </ng-container>
+
+            <!-- START Column -->
+            <ng-container matColumnDef="start">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Start </th>
+                <td mat-cell *matCellDef="let element"> {{element.originAirport | uppercase}} </td>
+            </ng-container>
+
+            <!-- ZIEL Column -->
+            <ng-container matColumnDef="ziel">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ziel </th>
+                <td mat-cell *matCellDef="let element"> {{element.destinationAirport | uppercase}} </td>
+            </ng-container>
+
+            <!-- EURO Column -->
+            <ng-container matColumnDef="euro">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Euro </th>
+                <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+            </ng-container>
+
+            <!-- TYP Column -->
+            <ng-container matColumnDef="typ">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Typ </th>
+                <td mat-cell *matCellDef="let element">
+                    <div *ngIf="element.flights[0].roundTrip==true; else oneWay">
+                        RT
+                    </div>    
+                    <ng-template #oneWay>
+                        OW
+                    </ng-template>
+                </td>
+            </ng-container>
+
+            <!-- Source Column -->
+            <ng-container matColumnDef="source">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Source </th>
+                <td mat-cell *matCellDef="let element"> {{element.flights[0].source | uppercase}} </td>
+            </ng-container>
+
+            <!-- Eingang Column -->
+            <ng-container matColumnDef="eingang">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Eingang </th>
+                <td mat-cell *matCellDef="let element"> {{element.creationTimestamp}} </td>
+            </ng-container>
+
+            <!-- Änderung Column -->
+            <ng-container matColumnDef="version">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Version </th>
+                <td mat-cell *matCellDef="let element"> {{element.modificationTimestamp}}</td>
+            </ng-container>
+
+            <!-- DB Aktiv Column -->
+            <!-- <ng-container matColumnDef="db_aktiv">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> DB Aktiv </th>
+               
+                <td mat-cell *matCellDef="let element">
+                    <div *ngIf="element.db_aktiv == true; else inactivDiv">
+                        <mat-icon class="mat-18" color="primary">check</mat-icon>
+                    </div>    
+                    <ng-template #inactivDiv>
+                        <mat-icon class="mat-18" color="primary"></mat-icon>
+                    </ng-template>               
+                </td>
+            </ng-container> -->
+
+            <!-- Status Column -->
+            <!-- <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+                <td mat-cell *matCellDef="let element" [ngClass]="{'status_ok': element.status.toLowerCase() =='ok', 'status_fehler': element.status.toLowerCase() !=='ok'}">
+                    <div *ngIf="element.status.toLowerCase() =='ok'; else statuslosDiv">
+                        <mat-icon class="mat-18">check</mat-icon>
+                    </div>
+                    <ng-template #statuslosDiv>
+                        {{element.status}}
+                    </ng-template>
+                </td>
+            </ng-container> -->
+
+            <!-- Detail Column -->
+            <ng-container matColumnDef="detail">
+                <th mat-header-cell *matHeaderCellDef> Detail </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button color="primary" routerLink="{{element.id}}/detail">
+                        <mat-icon class="mat-18">reorder</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
+</div>
