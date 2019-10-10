@@ -202,9 +202,21 @@
                         <ng-container matColumnDef="anrede" >
                             <th mat-header-cell *matHeaderCellDef> Anr </th>
                             <td mat-cell *matCellDef="let passenger">
-                                <mat-form-field floatLabel="never">
-                                    <input matInput [value]="passenger.gender" [(ngModel)]="passenger.gender">
-                                </mat-form-field>
+                                <div *ngIf="(passenger.type == 'A') && (passenger.gender == 'M')">
+                                    <mat-form-field floatLabel="never">
+                                        <input matInput [value]="'H'" >
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="(passenger.type == 'A') && (passenger.gender == 'F')">
+                                    <mat-form-field floatLabel="never">
+                                        <input matInput [value]="'D'" >
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="(passenger.type == 'C' || passenger.type == 'I') && (passenger.gender == 'F' || passenger.gender == 'M')">
+                                    <mat-form-field floatLabel="never">
+                                        <input matInput [value]="'K'" >
+                                    </mat-form-field>
+                                </div>
                             </td>
                         </ng-container>
                         <ng-container matColumnDef="name" >
