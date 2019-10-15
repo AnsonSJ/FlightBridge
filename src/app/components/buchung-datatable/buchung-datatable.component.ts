@@ -38,7 +38,7 @@ export class BuchungDatatableComponent implements OnInit {
   flightsgeber: string;
   statusCheck: string[]= ['Oneway nicht gebucht', 'in Klärung', 'Fertig', 'OK'];
 
-  displayedColumns: string[] = ['referenz', 'super_PNR', 'pax', 'fg', 'hin', 'zurueck', 'start', 'ziel', 'euro', 'typ', 'source', 'eingang', 'version', 'detail' ];
+  displayedColumns: string[] = ['referenz', 'super_PNR', 'pax', 'fg', 'hin', 'zurueck', 'start', 'ziel', 'euro', 'typ', 'source', 'eingang', 'version', 'status', 'detail' ];
   dataSource = new MatTableDataSource<Buchung>();
 
   statusItems: Status[] = [
@@ -49,9 +49,9 @@ export class BuchungDatatableComponent implements OnInit {
   ];
 
   filterForm = new FormGroup({
+    invoiceNr: new FormControl(),
     fromDate: new FormControl(),
     toDate: new FormControl(),
-    invoiceNr: new FormControl(),
     statusCheck: new FormControl(),
     textSearch: new FormControl(),
   });
@@ -65,7 +65,7 @@ export class BuchungDatatableComponent implements OnInit {
     private _adapter: DateAdapter<any>,
     private buchungDataService: BuchungDataService,
     public datepipe: DatePipe
-  ) {}
+  ) { } 
   
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -77,65 +77,70 @@ export class BuchungDatatableComponent implements OnInit {
     this._adapter.setLocale('de');
     this.dataSource.filterPredicate = (data, filter) =>{
       if (this.textSearch || this.fromDate || this.toDate || this.errorCheck.checked) {
-        let newFromDate = this.datepipe.transform(this.fromDate, 'MM.dd.yyyy');
-        let newToDate = this.datepipe.transform(this.toDate, 'MM.dd.yyyy'); 
+        let newFromDate = this.datepipe.transform(this.fromDate, 'dd.MM.yyyy');
+        let newToDate = this.datepipe.transform(this.toDate, 'dd.MM.yyyy'); 
         let newTextSearch = this.textSearch.trim().toLowerCase();
-        let isNewFromDate = newFromDate == data.flights[0].depDate;
-        let isNewToDate = newToDate == data.flights[0].arrAirport;
-        //let isStatusCheck = this.statusCheck.includes(data.status);
-        let isText = data.invoice.includes(newTextSearch) || newTextSearch == data.pnr;
+        let isNewFromDate = newFromDate == data.departureDate;
+        let isNewToDate = newToDate == data.returnDate;
+        let isStatusCheck = this.statusCheck.includes(data.statusStr);
+        /**
+          searchText Content
+         */
+        let isText = data.invoice.toLowerCase().includes(newTextSearch) ;
 
-        if (this.textSearch && !this.fromDate && !this.toDate && !this.statusCheck) {
+        if (this.textSearch && !this.fromDate && !this.toDate && !this.errorCheck.checked) {
           return isText;
         }
-        if (this.fromDate && !this.textSearch && !this.toDate && !this.statusCheck) {
-          return isNewFromDate;
-        }
-        if (this.toDate  && !this.textSearch && !this.fromDate && !this.statusCheck) {
-          return isNewToDate;
-        }
-        // if (this.statusCheck && !this.textSearch && !this.fromDate && !this.toDate) {
-        //   return isStatusCheck;
-        // }
-        if (this.textSearch && this.fromDate && !this.toDate && !this.statusCheck) {
+        if (this.textSearch && this.fromDate && !this.toDate && !this.errorCheck.checked) {
           return isText && isNewFromDate;
         }
-        if (this.textSearch && this.toDate && !this.fromDate && !this.statusCheck) {
-          return isText && isNewToDate;
-        }
-        // if (this.textSearch && !this.toDate && !this.fromDate && this.statusCheck) {
-        //   return isText && isStatusCheck;
-        // }
-        if (this.fromDate && this.toDate && !this.textSearch && !this.statusCheck) {
-          return isNewFromDate && isNewToDate;
-        }
-        // if (this.fromDate && !this.toDate && !this.textSearch && this.statusCheck) {
-        //   return isNewFromDate && isStatusCheck;
-        // }
-        // if (this.toDate && !this.fromDate && !this.textSearch && this.statusCheck) {
-        //   return isNewToDate && isStatusCheck;
-        // }
-        if (this.textSearch && this.fromDate && this.toDate && !this.statusCheck) {
+        if (this.textSearch && this.fromDate && this.toDate && !this.errorCheck.checked) {
           return isText && isNewFromDate && isNewToDate;
         }
-        // if (this.textSearch && !this.fromDate && this.toDate && this.statusCheck) {
-        //   return isText && isNewToDate && isStatusCheck;
-        // }
-        // if (this.textSearch && this.fromDate && !this.toDate && this.statusCheck) {
-        //   return isText && isNewFromDate && isStatusCheck;
-        // }
-        // if (!this.textSearch && this.fromDate && this.toDate && this.statusCheck) {
-        //   return isNewFromDate && isNewToDate && isStatusCheck;
-        // }
-        // if (this.textSearch && this.fromDate && this.toDate && this.statusCheck) {
-        //   return isText && isNewFromDate && isNewToDate && isStatusCheck;
-        // } 
+        if (this.textSearch && this.fromDate && this.toDate && this.errorCheck.checked) {
+          return isText && isNewFromDate && isNewToDate && isStatusCheck;
+        }
+        if (this.textSearch && !this.fromDate && this.toDate && !this.errorCheck.checked) {
+          return isText && isNewToDate;
+        }
+        if (this.textSearch && !this.fromDate && !this.toDate && this.errorCheck.checked) {
+          return isText && isStatusCheck;
+        }
+        if (this.textSearch && !this.fromDate && this.toDate && this.errorCheck.checked) {
+          return isText && isNewToDate && isStatusCheck;
+        }
+        if (this.textSearch && this.fromDate && !this.toDate && this.errorCheck.checked) {
+          return isText && isNewFromDate && isStatusCheck;
+        }
+
+        if (!this.textSearch && this.fromDate && !this.toDate && !this.errorCheck.checked) {
+          return isNewFromDate;
+        }
+        if (!this.textSearch && this.fromDate && this.toDate && !this.errorCheck.checked) {
+          return isNewFromDate && isNewToDate;
+        }
+        if (!this.textSearch && this.fromDate && this.toDate && this.errorCheck.checked) {
+          return isNewFromDate && isNewToDate && isStatusCheck;
+        }
+        if (!this.textSearch && this.fromDate && !this.toDate && this.errorCheck.checked) {
+          return isNewFromDate && isStatusCheck;
+        }
+
+        if (!this.textSearch && !this.fromDate && this.toDate && !this.errorCheck.checked) {
+          return isNewToDate;
+        }
+        if (!this.textSearch && !this.fromDate && this.toDate && this.errorCheck.checked) {
+          return isNewToDate && isStatusCheck;
+        }
+        if (!this.textSearch && !this.fromDate && !this.toDate && this.errorCheck.checked) {
+          return isStatusCheck;
+        }
       } else if (this.invoiceNr) {
         let newInvoiceNr = this.invoiceNr.trim().toUpperCase();
         return data.invoice.includes(newInvoiceNr);
       }
-      return true;
     }
+
   }
 
   applyFilter() {

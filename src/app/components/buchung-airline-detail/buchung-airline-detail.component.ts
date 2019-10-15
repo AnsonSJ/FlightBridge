@@ -41,6 +41,7 @@ export class BuchungAirlineDetailComponent implements OnInit {
   @Input() pnrsHin: string[];
   @Input() pnrsReturn: string[];
   @Input() passengers: Passenger[];
+  @Input() passengerPrices: string[];
 
   @ViewChild('depDateInput', {static: true}) depDateInput: any;
 

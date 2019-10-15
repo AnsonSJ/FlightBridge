@@ -7,6 +7,8 @@ import { Flight } from '../../models/flight';
 import { Segment } from '../../models/segment';
 import { Passenger } from '../../models/passenger';
 import { BuchungDataService } from '../../services/buchung-data.service';
+import { PassengerPrice } from 'src/app/models/passengerPrice';
+
 
 @Component({
   selector: 'app-buchung-detail',
@@ -41,6 +43,9 @@ export class BuchungDetailComponent implements OnInit {
   segs: string[]=[];
   pnrHin: string[]=[];
   pnrReturn: string[]=[];
+  passPrices: string[][]=[];
+  passengerPrice: number[]; 
+  passengerPrices: string[];
   
   constructor(
     private route: ActivatedRoute,
@@ -62,6 +67,11 @@ export class BuchungDetailComponent implements OnInit {
         this.flight = this.buchung.flights;
         this.flightDataSource.data = this.flight;
         this.passenger = this.buchung.passengers;
+
+        this.passPrices = this.flight.map(p => p.passengerPrices.map(i => i.price));
+        this.passengerPrice = this.sumPrice(this.passPrices);
+        this.passengerPrices = this.passengerPrice.map(i => i.toFixed(2));
+        //this.passengerPrices = this.flight.map(p => p.passengerPrices.map(i => i.price).toString());
 
         this.isRT = this.buchung.flights.map(i =>i.roundTrip);
         if (this.isRT.includes(true)) {
@@ -107,6 +117,11 @@ export class BuchungDetailComponent implements OnInit {
     let day = parseInt(cur[0]);
     return  new Date(year, month, day);
   } 
+
+  sumPrice(array: any) {
+    let result = array.reduce((r, a) => a.map((b, i) => (r[i] || 0) + b), []);
+    return result;
+  }
 
   // onSelect(buchung: Buchung): void {
   //   this.selectedUmbuchung = buchung;

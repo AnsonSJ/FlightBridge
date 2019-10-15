@@ -60,10 +60,17 @@
 .airline-detail-container .table-pas td.mat-cell:first-of-type {
   padding-left: 0;
 }
-.stornopreis {
+.passenger_preis {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-items: center;
+  justify-content: space-between;
+}
+.preis {
   margin-top: 10px;
 }
-.stornopreis span {
+.preis span {
   font-size: 16px;
 }
 .mat-card-footer {

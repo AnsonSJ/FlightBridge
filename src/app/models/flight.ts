@@ -1,4 +1,5 @@
 import { Segment } from './segment';
+import { PassengerPrice } from './passengerPrice';
 
 export class Flight {
     bookingTimestamp: string;
@@ -12,4 +13,7 @@ export class Flight {
     price: number;
     roundTrip: boolean;
     segments: Segment[];
+    passengerPrices: PassengerPrice[];
+    statusInt: number;
+    statusStr: string;
 }

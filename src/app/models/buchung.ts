@@ -8,9 +8,11 @@ export class Buchung {
     modificationTimestamp: string;
     originAirport: string;
     destinationAirport: string;
-    departureDate: Date;
-    returnDate: Date;
+    departureDate: string;
+    returnDate: string;
     invoice: string;
     flights: Flight[];
     passengers: Passenger[];
+    statusInt: number;
+    statusStr: string;
 }

@@ -41,34 +41,55 @@
           "arrTime" : "21:45"
         } ],
         "price" : 1269.94,
-        "roundTrip" : true
+        "passengerPrices" : [ {
+          "position" : 1,
+          "price" : 409.98
+        }, {
+          "position" : 2,
+          "price" : 409.99
+        }, {
+          "position" : 3,
+          "price" : 379.98
+        }, {
+          "position" : 4,
+          "price" : 70.0
+        } ],
+        "roundTrip" : true,
+        "statusInt" : 4,
+        "statusStr" : "Fertig"
       } ],
       "price" : 1269.94,
       "passengers" : [ {
+        "position" : 1,
         "gender" : "M",
         "type" : "A",
         "lastname" : "KLENZ",
         "firstname" : "HANSA",
         "birthdate" : "11.06.1994"
       }, {
+        "position" : 2,
         "gender" : "F",
         "type" : "A",
         "lastname" : "KLENZ",
         "firstname" : "HANSB",
         "birthdate" : "11.06.1994"
       }, {
+        "position" : 3,
         "gender" : "M",
         "type" : "C",
         "lastname" : "KLENZ",
         "firstname" : "HANSC",
         "birthdate" : "30.01.2014"
       }, {
+        "position" : 4,
         "gender" : "M",
         "type" : "I",
         "lastname" : "KLENZ",
-        "firstname" : "HANS-E",
+        "firstname" : "HANSD",
         "birthdate" : "11.06.2018"
-      } ]
+      } ],
+      "statusInt" : 1,
+      "statusStr" : "OK"
     },
     {
       "id" : 2,
@@ -98,7 +119,7 @@
           "bookingClass" : "Y",
           "depDate" : "01.11.2019",
           "depTime" : "07:00",
-          "arrDate" : "01.11.2019",
+          "arrDate" : "15.09.2019",
           "arrTime" : "08:50"
         }, {
           "depAirport" : "VIE",
@@ -112,7 +133,22 @@
           "arrTime" : "12:45"
         } ],
         "price" : 539.94,
-        "roundTrip" : false
+        "passengerPrices" : [ {
+          "position" : 1,
+          "price" : 159.98
+        }, {
+          "position" : 2,
+          "price" : 159.98
+        }, {
+          "position" : 3,
+          "price" : 149.98
+        }, {
+          "position" : 4,
+          "price" : 70.0
+        } ],
+        "roundTrip" : false,
+        "statusInt" : 4,
+        "statusStr" : "Fertig"
       }, {
         "bookingTimestamp" : "07.10.2019 15:13:06",
         "source" : "ypsilon",
@@ -145,35 +181,56 @@
           "arrTime" : "20:25"
         } ],
         "price" : 269.97,
-        "roundTrip" : false
+        "passengerPrices" : [ {
+          "position" : 1,
+          "price" : 79.99
+        }, {
+          "position" : 2,
+          "price" : 79.99
+        }, {
+          "position" : 3,
+          "price" : 74.99
+        }, {
+          "position" : 4,
+          "price" : 35.0
+        } ],
+        "roundTrip" : false,
+        "statusInt" : 4,
+        "statusStr" : "Fertig"
       } ],
-      "price" : 809.91003,
+      "price" : 809.91,
       "passengers" : [ {
+        "position" : 1,
         "gender" : "M",
         "type" : "A",
         "lastname" : "KLENZ",
         "firstname" : "HANSA",
         "birthdate" : "11.06.1994"
       }, {
+        "position" : 2,
         "gender" : "F",
         "type" : "A",
         "lastname" : "KLENZ",
         "firstname" : "HANSB",
         "birthdate" : "11.06.1994"
       }, {
+        "position" : 3,
         "gender" : "M",
         "type" : "C",
         "lastname" : "KLENZ",
         "firstname" : "HANSC",
         "birthdate" : "30.01.2014"
       }, {
+        "position" : 4,
         "gender" : "M",
         "type" : "I",
         "lastname" : "KLENZ",
         "firstname" : "HANSD",
         "birthdate" : "11.06.2018"
-      } ]
-    }
+      } ],
+      "statusInt" : 1,
+      "statusStr" : "OK"
+    } 
    ]
 }
 
