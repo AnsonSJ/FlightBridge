@@ -1,0 +1,58 @@
+.airline-detail-container{
+  width: 80%;
+  margin-top: 20px;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+.mat-table {
+  width: 100%;
+}
+.mat-card {
+  padding-right: 24px;
+  padding-left: 24px;
+  background: rgba(0,0,0,.04)
+}
+.mat-card-title {
+  font-size: 18px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.airline-detail__button--pnr {
+  position: relative;
+  height: 46px;
+  margin-bottom: 10px;
+}
+.airline-detail__button--pnr button {
+  position: absolute;
+  right: 0;
+  top: 5px;
+}
+.passenger_preis {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+.preis {
+  margin-top: 10px;
+}
+.preis span {
+  font-size: 16px;
+}
+.mat-card-footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0;
+}
+.mat-card-content {
+  max-height: 570px;
+  overflow: auto;
+}
+.author {
+  font-size: 14px;
+}
