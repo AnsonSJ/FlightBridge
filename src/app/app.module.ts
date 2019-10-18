@@ -27,6 +27,13 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import {CdkDetailRowDirective} from './cdk-detail-row.directive';
 import { BuchungAirlineDetailExpandComponent } from './components/buchung-airline-detail-expand/buchung-airline-detail-expand.component';
 import { BuchungPassengersComponent } from './components/buchung-passengers/buchung-passengers.component';
+import { AlertComponent } from './components/alert/alert.component';
+
+// used to create fake backend
+import { fakeBackendProvider } from './fake-backend';
+
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,6 +49,7 @@ import { BuchungPassengersComponent } from './components/buchung-passengers/buch
     CdkDetailRowDirective,
     BuchungAirlineDetailExpandComponent,
     BuchungPassengersComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,8 +59,15 @@ import { BuchungPassengersComponent } from './components/buchung-passengers/buch
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [LoaderService,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }],
+  providers: [
+    LoaderService,
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

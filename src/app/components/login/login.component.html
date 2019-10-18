@@ -12,7 +12,9 @@
                     <input matInput type="text" placeholder="Benutzername" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
                 </mat-form-field>
                 <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                    <div *ngIf="f.username.errors.required">Username is required</div>
+                    <div *ngIf="f.username.errors.required">
+                        <mat-icon class="info_tooltip" matTooltip="Benutzername ist erforderlich">info</mat-icon>            
+                    </div>
                 </div>
             </div>
             <div class="login-input form-group">
@@ -21,18 +23,18 @@
                     <input matInput type="password" placeholder="Passwort" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
                 </mat-form-field>
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.required">
+                        <mat-icon class="info_tooltip" matTooltip="Passwort ist erforderlich">info</mat-icon>
+                    </div>
                 </div>
             </div>
             <div class="login-input login-group form-group">
-                <mat-checkbox color="warn">Remember me</mat-checkbox>
+                <!-- <mat-checkbox color="warn">Remember me</mat-checkbox> -->
+                <a class="register-link" routerLink="/register">Registrieren</a>
                 <button mat-raised-button color="primary" class="login-button">
-                    Login
+                    Anmelden
                 </button>
             </div>
         </mat-card-content>
-        <mat-card-actions>
-
-        </mat-card-actions>
     </mat-card>
 </form>

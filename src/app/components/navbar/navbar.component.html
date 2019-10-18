@@ -1,8 +1,9 @@
-<mat-toolbar class="navbar">
+<mat-toolbar class="navbar" *ngIf="currentUser">
     <a href="https://www.alltours.de/" title="alltours" target="_blank" rel= noopener noreferrer>
         <img src="/assets/alltourslogo.jpg" class="logo" alt="Alltours Logo">
     </a>
     <div>
+        <a class="" (click)="logout()">Logout</a>
         <span class="navbar__project">Flight Bridge | </span>
         <span class="navbar__portal">Buchungsverwaltung</span>
     </div>
