@@ -15,6 +15,7 @@ export class BuchungPassengersComponent implements OnInit {
   @Input() flights: Flight[];
   @Input() passengers: Passenger[];
   @Input() passengerPrices: string[];
+  @Input() statusCheck: string[];
 
   displayedColumnPas: string[] = ['anrede', 'name', 'vorname', 'alter', 'euro'];
 

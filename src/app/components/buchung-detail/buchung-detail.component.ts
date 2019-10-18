@@ -57,19 +57,11 @@ export class BuchungDetailComponent implements OnInit {
   passPrices: string[][]=[];
   passengerPrice: number[]; 
   passengerPrices: string[];
-
-  @Input() singleChildRowDetail: boolean;
-
-  private openedRow: CdkDetailRowDirective
-  
-  onToggleChange(cdkDetailRow: CdkDetailRowDirective) : void {
-    if (!this.singleChildRowDetail && this.openedRow && this.openedRow.expended) {
-      this.openedRow.toggle();      
-    }
-    this.openedRow = cdkDetailRow.expended ? cdkDetailRow : undefined;
-  }
-
+  statusCheck: string[]= ['Oneway nicht gebucht', 'in Klärung', 'Fertig', 'OK'];
   expandedElement: any;
+  openedRow: CdkDetailRowDirective
+  
+  @Input() singleChildRowDetail: boolean;
   
   constructor(
     private route: ActivatedRoute,
@@ -96,7 +88,6 @@ export class BuchungDetailComponent implements OnInit {
         this.passengerPrice = this.sumPrice(this.passPrices);
         this.passengerPrices = this.passengerPrice.map(i => i.toFixed(2));
         //this.passengerPrices = this.flight.map(p => p.passengerPrices.map(i => i.price).toString());
-
 
         this.isRT = this.buchung.flights.map(i =>i.roundTrip);
         if (this.isRT.includes(true)) {
@@ -165,6 +156,13 @@ export class BuchungDetailComponent implements OnInit {
       }
     }
     return this.segment;
+  }
+
+  onToggleChange(cdkDetailRow: CdkDetailRowDirective) : void {
+    if (!this.singleChildRowDetail && this.openedRow && this.openedRow.expended) {
+      this.openedRow.toggle();      
+    }
+    this.openedRow = cdkDetailRow.expended ? cdkDetailRow : undefined;
   }
 
 

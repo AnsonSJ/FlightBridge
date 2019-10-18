@@ -49,15 +49,15 @@
             </div>
         </mat-card-content>
         <mat-card-footer>
-            <button mat-raised-button color="primary">Abbrechen</button>
+            <button mat-raised-button color="primary" routerLink="">Abbrechen</button>
             <div class="author">
                 <span>Letzte Änderung von {{buchung.modificationTimestamp}}</span>
             </div>
             <div class="status">
                 <span><strong>Status: </strong></span>
                 <mat-form-field floatLabel="never">
-                    <mat-select [(value)]="statusSel">
-                        <mat-option value="{{buchung.status}}">{{buchung.status}}</mat-option>
+                    <mat-select [(value)]="buchung.statusStr">
+                        <mat-option *ngFor="let status of statusCheck" [value]="status">{{status}}</mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

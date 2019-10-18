@@ -51,8 +51,6 @@ td:last-child.mat-cell{
 .flight-row {
     position: relative;
     overflow: hidden;
-}
-.flight-row:not(.expanded) {
     cursor: pointer;
 }
 .flight-row:not(.expanded):hover {

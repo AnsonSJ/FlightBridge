@@ -123,7 +123,6 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-            matRipple
             class="flight-row"
             [cdkDetailRow]="row" 
             [cdkDetailRowTpl]="tpl"
@@ -152,6 +151,7 @@
     [data]="dataInfo" 
     [flights]="flight" 
     [passengerPrices]="passengerPrices"
+    [statusCheck]="statusCheck"
     >
 </app-buchung-passengers>
 
