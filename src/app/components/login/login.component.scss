@@ -1,6 +1,15 @@
+.login-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.04);
+}
 mat-card {
     width: 30em;
-    flex: 0 0 20em;
+    flex: 0;
+    margin: 0 auto;
 }
 mat-card-header {
     display: flex;
@@ -11,14 +20,11 @@ mat-card-content {
 }
 .mat-card-header .mat-card-title {
     margin-top: 15px;
-    font-size: 26px;
+    font-size: 22px;
 }
 mat-form-field {
     width: 100%;
     margin: 5px 10px;
-}
-mat-checkbox {
-    margin-left: 5px;
 }
 .mat-icon {
     font-size: 26px;
@@ -29,14 +35,6 @@ mat-checkbox {
     justify-content: space-between;
     align-items: center;
     font-size: 1.1rem;
-}
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
 }
 .login-button {
     font-size: 1rem;
@@ -49,4 +47,10 @@ form {
 .register-link {
     margin-left: 10px;
     font-size: 15px;
+    text-decoration: none;
+    color: rgba(0,0,0,.54);
+}
+.register-link:hover {
+    text-decoration: underline;
+    color: #3f51b5;
 }

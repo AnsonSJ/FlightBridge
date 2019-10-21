@@ -1,7 +1,9 @@
-.alert-danger {
+.logo {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 15px;
-    color: #f44336;
+    padding: 32px 0;
+}
+.logo img {
+    width: 16%;
 }

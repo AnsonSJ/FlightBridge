@@ -471,3 +471,6 @@
 2019-10-14 15:35:04.573  INFO 5296 --- [XNIO-2 task-1] i.u.servlet                              : Initializing Spring FrameworkServlet 'dispatcherServlet'
 2019-10-14 15:35:04.574  INFO 5296 --- [XNIO-2 task-1] o.s.w.s.DispatcherServlet                : FrameworkServlet 'dispatcherServlet': initialization started
 2019-10-14 15:35:04.613  INFO 5296 --- [XNIO-2 task-1] o.s.w.s.DispatcherServlet                : FrameworkServlet 'dispatcherServlet': initialization completed in 38 ms
+2019-10-20 22:34:18.478  WARN 5296 --- [HikariPool-1 housekeeper] c.z.h.p.HikariPool                       : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3h51m8s522ms83µs700ns).
+2019-10-20 22:34:20.295  WARN 5296 --- [DefaultMessageListenerContainer-1] o.s.j.l.DefaultMessageListenerContainer  : Setup of JMS message listener invoker failed for destination 'peakworkExportFilterUpdate' - trying to recover. Cause: Connection reset
+2019-10-20 22:34:20.359  INFO 5296 --- [DefaultMessageListenerContainer-1] o.s.j.l.DefaultMessageListenerContainer  : Successfully refreshed JMS Connection

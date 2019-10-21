@@ -34,6 +34,7 @@ import { fakeBackendProvider } from './fake-backend';
 
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { LogoComponent } from './components/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
     BuchungAirlineDetailExpandComponent,
     BuchungPassengersComponent,
     AlertComponent,
+    LogoComponent,
   ],
   imports: [
     BrowserModule,

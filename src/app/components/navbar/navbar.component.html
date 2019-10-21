@@ -2,9 +2,14 @@
     <a href="https://www.alltours.de/" title="alltours" target="_blank" rel= noopener noreferrer>
         <img src="/assets/alltourslogo.jpg" class="logo" alt="Alltours Logo">
     </a>
-    <div>
-        <a class="" (click)="logout()">Logout</a>
+    <div class="navbar-item">
         <span class="navbar__project">Flight Bridge | </span>
         <span class="navbar__portal">Buchungsverwaltung</span>
+        <mat-chip-list (click)="logout()" title="Logout" class="logout">
+            <mat-chip color="primary" selected (click)="logout()" title="Logout">
+                <mat-icon class="mat-18">power_settings_new</mat-icon>
+                <span class="current-user">{{currentUser.username}}</span>
+            </mat-chip>
+        </mat-chip-list>
     </div>
 </mat-toolbar>

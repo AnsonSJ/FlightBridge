@@ -30,6 +30,7 @@ import {
     MatSelectModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatChipsModule,
  } from '@angular/material';
 
 import { 
@@ -61,6 +62,7 @@ import {CdkDetailRowDirective} from '../../cdk-detail-row.directive';
     MatSelectModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatChipsModule,
   ],
   exports: [
     CommonModule,
@@ -82,6 +84,7 @@ import {CdkDetailRowDirective} from '../../cdk-detail-row.directive';
     MatSelectModule,
     MatCardModule,
     MatProgressSpinnerModule, 
+    MatChipsModule,
     
     // CDK
     A11yModule,
