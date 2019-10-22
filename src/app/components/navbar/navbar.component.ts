@@ -15,9 +15,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    console.log(this.currentUser.username)
    }
-
   ngOnInit() {
   }
 
@@ -25,5 +23,4 @@ export class NavbarComponent implements OnInit {
     this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
-
 }

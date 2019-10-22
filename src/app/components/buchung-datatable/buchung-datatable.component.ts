@@ -70,11 +70,12 @@ export class BuchungDatatableComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   /* get Dom Element (ID) */ 
-  // @ViewChild('invoiceSearch', {static: true}) invoiceSearch: any;
+  @ViewChild('invoiceSearch', {static: true}) invoiceSearch: any;
   @ViewChild('errorCheck', {static: true}) errorCheck: any;
   
   ngOnInit() { 
     this._adapter.setLocale('de');
+    this.focusReferenz();
     this.dataSource.filterPredicate = (data, filter) =>{
       if (this.textSearch || this.fromDate || this.toDate || this.errorCheck.checked) {
         let newFromDate = this.datepipe.transform(this.fromDate, 'dd.MM.yyyy');
@@ -143,8 +144,8 @@ export class BuchungDatatableComponent implements OnInit {
 
   }
 
-  applyFilter() {
-    this.getBuchungData();
+  applyFilter(searchValue: string) {
+    this.getBuchungData(searchValue);
     this.dataSource.filter = '' + Math.random();
   }
 
@@ -154,19 +155,19 @@ export class BuchungDatatableComponent implements OnInit {
   }
 
   /* getData from Service */
-  getBuchungData() {
-    this.buchungDataService.getData().subscribe((data: Buchung[]) => {
+  getBuchungData(searchValue: string) {
+    this.buchungDataService.searchInvoice(searchValue).subscribe((data: Buchung[]) => {
       this.dataSource.data = data;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
   }
 
-  // focusReferenz() {
-  //   if(!this.panelOpenState) {
-  //     this.invoiceSearch.nativeElement.focus();
-  //   }
-  // }
+  focusReferenz() {
+    if(!this.panelOpenState) {
+      this.invoiceSearch.nativeElement.focus();
+    }
+  }
 
   resetCheckbox() {
     if(this.errorCheck.checked) {
@@ -177,7 +178,7 @@ export class BuchungDatatableComponent implements OnInit {
     }
   }
 
-  onChange($event) {
+  onChange($event: any) {
     if($event.checked) {
       if(this.statusCheck.length > 3) {
         this.statusCheck.pop();

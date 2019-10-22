@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -43,6 +43,23 @@ export class BuchungDataService {
         catchError(this.handleError<Buchung[]>('getData()', []))
       );
   }
+
+  searchInvoice(term: string): Observable<Buchung[]> {
+    term = term.toLowerCase();
+    term = term.trim();
+
+    // Add safe, URL encoded search parameter if there is a search term
+    const options = term ?
+    { params: new HttpParams().set('invoice', term) } : {};
+    return this.http.get<Buchung[]>(this.apiUrl, options)
+    .pipe(
+      catchError(this.handleError<Buchung[]>('searchData', []))
+    );
+  }
+  
+  // searchInfo(text: string, hin: ) {
+
+  // }
 
   getDataDetail(id: number): Observable<Buchung> {
     const url = `${this.apiUrl}/${id}`;
